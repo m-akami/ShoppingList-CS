@@ -1,0 +1,89 @@
+namespace ShoppingList
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string status = "";
+            List<string> items = new List<string>();
+            string filePath = "shoppinglist.txt";
+            Console.BackgroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("Shopping List" + status);
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.WriteLine("");
+            Console.WriteLine("1. Add Item");
+            Console.WriteLine("2. View List");
+            Console.WriteLine("3. Delete Item");
+            Console.WriteLine("4. Save and Exit");
+            Console.WriteLine("");
+            Console.Write("Option: ");
+
+            int choice = Convert.ToInt32(Console.ReadLine());
+
+            while (choice != 4)
+            {
+                switch (choice)
+                {
+                    case 1:
+                        Console.Clear();
+                        Console.BackgroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine("Shopping List" + status);
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.WriteLine("");
+                        Console.Write("Item: ");
+                        string item = Console.ReadLine();
+                        items.Add(item);
+                        break;
+                    case 2:
+                        Console.Clear();
+                        Console.BackgroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine("Shopping List" + status);
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.WriteLine("");
+                        for (int i = 0; i < items.Count; i++)
+                        {
+                            Console.WriteLine(i + ": " + items[i]);
+                        }
+                        Console.WriteLine("");
+                        Console.Write("Press enter to return to the menu");
+                        Console.ReadKey();
+                        break;
+                    case 3:
+                        Console.Clear();
+                        Console.BackgroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine("Shopping List" + status);
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.WriteLine("");
+                        Console.WriteLine("Enter the index of the item to delete:");
+                        int index = Convert.ToInt32(Console.ReadLine());
+                        if (index >= 0 && index < items.Count)
+                        {
+                            items.RemoveAt(index);
+                            Console.WriteLine("Item deleted.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid choice, try again");
+                        }
+                        break;
+                }
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("Shopping List" + status);
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.WriteLine("");
+                Console.WriteLine("1. Add Item");
+                Console.WriteLine("2. View List");
+                Console.WriteLine("3. Delete Item");
+                Console.WriteLine("4. Save and Exit");
+                Console.WriteLine("");
+                Console.Write("Option: ");
+                choice = Convert.ToInt32(Console.ReadLine());
+            }
+
+            File.WriteAllLines(filePath, items);
+            Console.WriteLine("");
+            Console.WriteLine("Shopping list saved to file.");
+        }
+    }
+}
